@@ -1,0 +1,63 @@
+html,
+body,
+#root {
+  --at-apply: h-full p-0 m-0 overflow-auto;
+}
+
+.full-ctn {
+  --at-apply: h-full overflow-hidden;
+}
+
+.all-center {
+  --at-apply: flex flex-col items-center justify-center;
+}
+
+.v-center {
+  --at-apply: flex items-center gap-1;
+}
+
+.col-ctn {
+  --at-apply: flex flex-col overflow-hidden;
+  > div {
+    --at-apply: shrink-0;
+  }
+}
+
+.ctn-body {
+  --at-apply: flex-1 overflow-hidden;
+}
+
+.split {
+  > div {
+    --at-apply: box-border;
+  }
+}
+
+.gutter {
+  &.gutter-horizontal {
+    cursor: url('/img/col-resize.png') 8 4, col-resize;
+  }
+  &.gutter-vertical {
+    cursor: url('/img/row-resize.png') 8 4, row-resize;
+  }
+}
+
+.full-spin {
+  > .ant-spin-container {
+    --at-apply: h-full overflow-hidden;
+    > div {
+      --at-apply: box-border h-full;
+    }
+  }
+}
+
+.react-draggable {
+  > .close-btn {
+    --at-apply: absolute cursor-pointer transition text-gray;
+    top: 0.5rem;
+    right: 0.5rem;
+    &:hover {
+      --at-apply: text-red;
+    }
+  }
+}

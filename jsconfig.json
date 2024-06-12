@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/renderer/src/*"]
+    },
+    "types": ["./auto-imports.d.ts"]
+  }
+}
