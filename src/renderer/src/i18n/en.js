@@ -27,7 +27,7 @@ export default {
     moonshot: 'moonshot',
     zhipu: 'glm',
     envTip:
-      'It is recommended to store the API Key in the local environment variable instead of writing it on the page. The names of the environment variables are as follows: qwen(DASHSCOPE_API_KEY), moonshot(MOONSHOT_API_KEY), glm(ZHIPU_API_KEY).',
+      'You can store the API Key in the local environment variable, or you can modify it in the above configuration. The names of the environment variables are as follows: qwen(DASHSCOPE_API_KEY), moonshot(MOONSHOT_API_KEY), glm(ZHIPU_API_KEY).',
     noOptionsTip:
       'Note that you have not yet configured AI, you need to configure an available AI interface before you can perform subsequent chat and other functions.',
     qwenRefer: 'The QWEN API applications, there is a free quota that can be used for a long time, see',

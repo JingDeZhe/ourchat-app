@@ -13,9 +13,9 @@
 
 ## AI 配置
 
-进入应用时如果没有配置 AI，则会提醒一次，你需要首先配置一个可用的 API 才能让好友正常聊天和发朋友圈，现在支持通义千问和 Moonshot（就是 Kimi）。
+进入应用时如果没有配置 AI，则会提醒一次，你需要首先配置一个可用的 API 才能让好友正常聊天和发朋友圈，现在支持通义千问、 Moonshot（就是 Kimi）和智谱。
 
-![alt text](assets/image-5.png)
+![alt text](assets/image.png)
 
 1. 通义千问 API 申请，有可以用挺久的免费额度，见[dashscope](https://help.aliyun.com/zh/dashscope/developer-reference/api-details)
 2. Moonshot API 申请，有可以用挺久的免费额度，见[moonshot](https://platform.moonshot.cn/docs/intro)
@@ -26,7 +26,7 @@
 
 好友信息
 
-![alt text](assets/image.png)
+![alt text](assets/image-1.png)
 
 > 当前的好友实际上是初始化的时候随机生成的几十个人
 >
@@ -36,23 +36,23 @@
 
 添加好友
 
-![alt text](assets/image-1.png)
+![alt text](assets/image-2.png)
 
 提醒好友发朋友圈
 
-![alt text](assets/image-2.png)
+![alt text](assets/image-3.png)
 
 > 以后会写一个好友之间交互的逻辑，现在好友发朋友圈是自己提醒的
 
 聊天界面
 
-![alt text](assets/image-3.png)
+![alt text](assets/image-4.png)
 
 > 一个简单的聊天界面，实际上是 Markdown 内容的
 > 可以上传图片，上传的图片也是存在 indexedDB 中
 
 朋友圈界面
 
-![alt text](assets/image-4.png)
+![alt text](assets/image-5.png)
 
 > 一个很简陋的朋友圈界面，还在丰富中

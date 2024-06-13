@@ -9,7 +9,7 @@ export const settingAiLoader = async () => {
 }
 
 export const SettingAi = () => {
-  const { t } = useTranslation()
+  const { i18n, t } = useTranslation()
   const [form] = Form.useForm()
   useEffect(() => {
     if (!isValidAiOptions()) {
@@ -27,10 +27,13 @@ export const SettingAi = () => {
     toast.success(t('successTip'))
   }
 
-  const handleFieldsChange = () => {
-    const type = form.getFieldValue('type')
-    const envKey = getEnvAiKey(type)
-    envKey && form.setFieldValue('key', envKey)
+  const handleFieldsChange = (d) => {
+    const name = d[0].name[0]
+    if (name === 'type') {
+      const type = form.getFieldValue('type')
+      const envKey = getEnvAiKey(type)
+      envKey && form.setFieldValue('key', envKey)
+    }
   }
 
   return (

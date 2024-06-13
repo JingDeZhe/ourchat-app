@@ -59,7 +59,6 @@ export const chatWithAi = async (config) => {
     return { role: d.type === 'from' ? 'user' : 'assistant', content: d.content }
   })
   messages.push(...histories2, { role: 'user', content: message })
-  console.log(messages)
   if (!window.api) return EMPTY_RESPONSE
 
   return window.api.chatWithAi({ ...options, messages })
