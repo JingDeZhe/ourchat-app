@@ -9,7 +9,7 @@
 
 好吧，其实想要做的功能大概就是以上两点，对于一般的聊天软件而言似乎很平常，但这是一款只有你一个人的聊天软件，没有服务器，所有内容保存在本地，朋友能回复、发朋友圈、给别人的朋友圈点赞，只是因为他们是 AI 罢了。
 
-[体验地址](https://jingdezhe.github.io/ourchat/)
+[下载地址](https://store-1258290249.cos.ap-guangzhou.myqcloud.com/others/ourchat/ourchat-1.0.1-setup.exe)
 
 ## AI 配置
 
