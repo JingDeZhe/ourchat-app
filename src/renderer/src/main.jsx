@@ -3,19 +3,17 @@ import 'overlayscrollbars/overlayscrollbars.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'react-contexify/dist/ReactContexify.css'
 import './styles/main.scss'
+import './i18n/main'
 
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './i18n'
 import { RouterProvider } from 'react-router-dom'
 import { router } from './router/main'
 import { Slide, ToastContainer } from 'react-toastify'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <React.Suspense fallback="loading">
-      <RouterProvider router={router}></RouterProvider>
-    </React.Suspense>
+    <RouterProvider router={router}></RouterProvider>
     <ToastContainer
       position="top-center"
       autoClose={500}

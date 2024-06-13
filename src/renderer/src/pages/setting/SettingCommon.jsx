@@ -1,8 +1,8 @@
 import { localGet, localSet } from '@/utils/main'
-import { Form, Select, Button } from 'antd'
+import { Form, Select } from 'antd'
 import { useTranslation } from 'react-i18next'
 import { useLoaderData } from 'react-router-dom'
-import i18n from '@/i18n'
+import i18n from '@/i18n/main'
 import { useRefresh } from '@/composables/hooks'
 const { Option } = Select
 
@@ -29,11 +29,7 @@ export const SettingCommon = () => {
   }
   return (
     <div className="setting-common setting-body">
-      <Form
-        form={form}
-        labelCol={{ flex: '100px' }}
-        onFieldsChange={handleConfirm}
-      >
+      <Form form={form} labelCol={{ flex: '100px' }} onFieldsChange={handleConfirm}>
         <Form.Item name="language" label={t('language')}>
           <Select>
             <Option value="zh">中文</Option>

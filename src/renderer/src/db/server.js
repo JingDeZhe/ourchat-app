@@ -1,10 +1,17 @@
 import { chatWithOther, getMoment } from './ai'
-import { db } from './main'
+import { db, prepareFakeData } from './main'
 
 const avatarCache = {}
 class FakeServer {
   constructor() {
     this.db = db
+    this.ready = false
+  }
+
+  async init() {
+    if (this.ready) return
+    await prepareFakeData()
+    this.ready = true
   }
 
   async getActiveContacts(fromId) {
@@ -167,7 +174,8 @@ class FakeServer {
   }
 
   async fakeAddMoment(fromId) {
-    return getMoment(fromId).then((d) => {
+    const user = await this.getUser(fromId)
+    return getMoment(user.nickname).then((d) => {
       return this.addMoment(fromId, '日常', d)
     })
   }

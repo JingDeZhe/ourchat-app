@@ -1,4 +1,3 @@
-import i18n from '@/i18n'
 import { localGet, localSet } from '@/utils/main'
 
 const EMPTY_RESPONSE = '……'
@@ -40,12 +39,11 @@ export const chatWithOther = async (character, message, histories) => {
   return chatWithAi({ character, message, histories })
 }
 
-export const getMoment = async (key) => {
+export const getMoment = async (nickname) => {
   if (!isValidAiOptions()) return EMPTY_RESPONSE
   return chatWithAi({
-    key,
-    character: '你是一个很会写朋友圈的人。',
-    message: `帮我写一篇朋友圈，不超过60字，记录当前（${new Date().toTimeString()}）发生的趣事，不要包含朋友圈外的其它回答文字。`
+    character: `你叫${nickname}，是一个很会写朋友圈的人。`,
+    message: `请写一篇和你自己相关的朋友圈，不超过60字，记录当前（${new Date().toTimeString()}）发生的趣事，不要包含朋友圈外的其它回答文字。`
   })
 }
 
@@ -55,13 +53,13 @@ export const chatWithAi = async (config) => {
   if (message.startsWith('fileStore:')) return EMPTY_RESPONSE
   const messages = []
   if (character) {
-    messages.push({ role: 'system', content: `你是${character}` })
+    messages.push({ role: 'system', content: character.startsWith('你是') ? character : `你是${character}` })
   }
   const histories2 = histories.map((d) => {
     return { role: d.type === 'from' ? 'user' : 'assistant', content: d.content }
   })
   messages.push(...histories2, { role: 'user', content: message })
-
+  console.log(messages)
   if (!window.api) return EMPTY_RESPONSE
 
   return window.api.chatWithAi({ ...options, messages })

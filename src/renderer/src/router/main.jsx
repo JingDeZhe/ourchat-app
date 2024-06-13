@@ -16,6 +16,7 @@ export const router = createHashRouter([
     errorElement: ErrorPage,
     loader: async ({ params }) => {
       if (!params.userId) {
+        await server.init()
         const user = await server.getFirstUser()
         if (!isValidAiOptions()) {
           return redirect(`/${user.id}/setting/ai`)
