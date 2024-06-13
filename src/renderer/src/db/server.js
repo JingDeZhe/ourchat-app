@@ -8,24 +8,16 @@ class FakeServer {
   }
 
   async getActiveContacts(fromId) {
-    const relations = await db.relations
-      .where({ fromId })
-      .toArray((arr) => arr.filter((d) => d.status === '1'))
-    return Promise.all(relations.map((d) => this.getContact(d.id))).then(
-      (arr) => arr.filter((d) => d)
-    )
+    const relations = await db.relations.where({ fromId }).toArray((arr) => arr.filter((d) => d.status === '1'))
+    return Promise.all(relations.map((d) => this.getContact(d.id))).then((arr) => arr.filter((d) => d))
   }
 
   async getContacts(fromId) {
     const relations = await db.relations.where({ fromId }).toArray()
-    return Promise.all(relations.map((d) => this.getContact(d.id))).then(
-      (arr) => {
-        arr.sort((a, b) =>
-          new Intl.Collator('zh-CN').compare(a.username, b.username)
-        )
-        return arr
-      }
-    )
+    return Promise.all(relations.map((d) => this.getContact(d.id))).then((arr) => {
+      arr.sort((a, b) => new Intl.Collator('zh-CN').compare(a.username, b.username))
+      return arr
+    })
   }
 
   async getContact(id) {
@@ -34,7 +26,7 @@ class FakeServer {
     const user = await this.db.users.get(relation.targetId)
     return {
       ...user,
-      ...relation,
+      ...relation
     }
   }
 
@@ -83,9 +75,7 @@ class FakeServer {
   async getRelationUsers(fromId) {
     if (!fromId) return []
     const users = await this.getUsers()
-    const targetIds = await this.db.relations
-      .where({ fromId })
-      .toArray((arr) => arr.map((d) => d.targetId))
+    const targetIds = await this.db.relations.where({ fromId }).toArray((arr) => arr.map((d) => d.targetId))
     for (const user of users) {
       user.inRelation = targetIds.includes(user.id)
     }
@@ -105,7 +95,7 @@ class FakeServer {
     const { fromId, targetId } = await this.db.relations.get(relationId)
     return Promise.all([
       this.db.messages.where({ fromId, targetId }).toArray(),
-      this.db.messages.where({ fromId: targetId, targetId: fromId }).toArray(),
+      this.db.messages.where({ fromId: targetId, targetId: fromId }).toArray()
     ]).then(([a, b]) => {
       a.forEach((d) => (d.type = 'from'))
       b.forEach((d) => (d.type = 'target'))
@@ -113,28 +103,26 @@ class FakeServer {
     })
   }
 
-  async sendMessage(relationId, content) {
+  async sendMessage(relationId, content, histories) {
     const { fromId, targetId } = await this.db.relations.get(relationId)
     return Promise.all([
       this.db.messages.put({
         fromId,
         targetId,
         content,
-        time: Date.now(),
+        time: Date.now()
       }),
       this.getRelation(relationId).then(async (d) => {
         const character = d?.character || ''
-        return chatWithOther(fromId + targetId, character, content).then(
-          (res) => {
-            return this.db.messages.put({
-              fromId: targetId,
-              targetId: fromId,
-              content: res,
-              time: Date.now() + 10,
-            })
-          }
-        )
-      }),
+        return chatWithOther(character, content, histories).then((res) => {
+          return this.db.messages.put({
+            fromId: targetId,
+            targetId: fromId,
+            content: res,
+            time: Date.now() + 10
+          })
+        })
+      })
     ])
   }
 
@@ -146,7 +134,7 @@ class FakeServer {
     const { fromId, targetId } = await this.db.relations.get(relationId)
     return Promise.all([
       this.db.messages.where({ fromId, targetId }).delete(),
-      this.db.messages.where({ fromId: targetId, targetId: fromId }).delete(),
+      this.db.messages.where({ fromId: targetId, targetId: fromId }).delete()
     ])
   }
 
@@ -161,20 +149,12 @@ class FakeServer {
 
   async readFile(desc) {
     if (!desc.startsWith('fileStore:')) return '#'
-    return this.db.fileStore
-      .get(desc.slice(10))
-      .then((d) => readFileAsUrl(d.file))
+    return this.db.fileStore.get(desc.slice(10)).then((d) => readFileAsUrl(d.file))
   }
 
   async getMoments(fromId) {
-    const targetIds = await this.db.relations
-      .where({ fromId })
-      .toArray((arr) => arr.map((d) => d.targetId))
-    return this.db.moments
-      .where('fromId')
-      .anyOf(targetIds)
-      .reverse()
-      .sortBy('time')
+    const targetIds = await this.db.relations.where({ fromId }).toArray((arr) => arr.map((d) => d.targetId))
+    return this.db.moments.where('fromId').anyOf(targetIds).reverse().sortBy('time')
   }
 
   async addMoment(fromId, title, content) {
@@ -182,7 +162,7 @@ class FakeServer {
       fromId,
       title,
       content,
-      time: Date.now(),
+      time: Date.now()
     })
   }
 

@@ -2,20 +2,25 @@ import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
+import { initCustomEvent } from './custom'
 
 function createWindow() {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
+    id: 1,
     width: 1200,
     height: 800,
+    minWidth: 700,
+    minHeight: 500,
     show: false,
-    menuBarVisible: false,
+    frame: false,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: true
     }
   })
+  mainWindow.setMenu(null)
 
   mainWindow.on('ready-to-show', () => {
     mainWindow.show()
@@ -49,10 +54,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // IPC test
-  ipcMain.on('ping', () => console.log('pong'))
-
   createWindow()
+  initCustomEvent()
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the

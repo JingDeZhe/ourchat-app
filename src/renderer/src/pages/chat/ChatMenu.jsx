@@ -21,7 +21,7 @@ export const ChatMenu = ({ contacts, contactId, onSelect, onRefresh }) => {
 
   const CONTACT_MENU = 'CHAT_CONTACT_MENU'
   const { show: showContactMenu } = useContextMenu({
-    id: CONTACT_MENU,
+    id: CONTACT_MENU
   })
   let _menuId = ''
   const handleContactMenu = (e) => {
@@ -39,18 +39,14 @@ export const ChatMenu = ({ contacts, contactId, onSelect, onRefresh }) => {
   return (
     <div className="chat-menu col-ctn border-r">
       <div className="header">
-        <Input
-          value={queryText}
-          onInput={handleQuery}
-          placeholder={t('search')}
-        ></Input>
+        <Input value={queryText} onInput={handleQuery} placeholder={t('search')}></Input>
       </div>
       <Scrollbar className="ctn-body" options={scrollbarOptions} defer>
         {filteredContacts.map((d) => {
           return (
             <div
               className={cls('user-info', {
-                active: contactId === d.id,
+                active: contactId === d.id
               })}
               key={d.id}
               onClick={() => onSelect(d.id)}

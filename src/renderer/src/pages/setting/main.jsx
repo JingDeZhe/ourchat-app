@@ -14,19 +14,17 @@ export const Setting = () => {
     {
       key: 'common',
       label: t('common'),
-      icon: <i className="i-tabler-dumpling" />,
+      icon: <i className="i-tabler-dumpling" />
     },
     {
       key: 'ai',
       label: t('ai.label'),
-      icon: <i className="i-tabler-robot-face" />,
-    },
+      icon: <i className="i-tabler-robot-face" />
+    }
   ]
 
   useEffect(() => {
-    const activeCategory = menuItems.find(
-      (d) => location.pathname.indexOf(d.key) !== -1
-    )
+    const activeCategory = menuItems.find((d) => location.pathname.indexOf(d.key) !== -1)
     setActiveModule(activeCategory?.key || '')
   }, [location])
 
@@ -35,7 +33,7 @@ export const Setting = () => {
   }
 
   return (
-    <div className="main-setting flex">
+    <div className="full-ctn main-setting flex">
       <div>
         <ConfigProvider
           theme={{
@@ -45,9 +43,9 @@ export const Setting = () => {
                 itemActiveBg: '#f9bb77',
                 itemSelectedColor: '#f97316',
                 itemSelectedBg: '#f2f2f2',
-                itemBg: '#f2f2f2',
-              },
-            },
+                itemBg: '#f2f2f2'
+              }
+            }
           }}
         >
           <Menu

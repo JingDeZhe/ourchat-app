@@ -1,7 +1,7 @@
 import { server } from '@/db/server'
 import { ChatMenu } from './ChatMenu'
 import { ChatBody } from './ChatBody'
-import { sessionDel, sessionGet, sessionSet } from '@/utils/main'
+import { localDel, localGet, localSet } from '@/utils/main'
 import { MainLayout } from '@/components/MainLayout'
 import { useLoaderData } from 'react-router-dom'
 import { useRefresh } from '@/composables/hooks'
@@ -17,20 +17,20 @@ export const Chat = () => {
   const { state } = useLocation()
 
   const getLastContactId = () => {
-    const id = state?.contactId || sessionGet(LAST_CHAT_ID)
+    const id = state?.contactId || localGet(LAST_CHAT_ID)
     if (id) {
       if (contacts.find((d) => d.id === id)) {
-        sessionSet(LAST_CHAT_ID, id)
+        localSet(LAST_CHAT_ID, id)
         return id
       }
-      sessionDel(LAST_CHAT_ID)
+      localDel(LAST_CHAT_ID)
     }
     return ''
   }
 
   const [contactId, setContactId] = useState(getLastContactId)
   const handleSelectContact = (id) => {
-    sessionSet(LAST_CHAT_ID, id)
+    localSet(LAST_CHAT_ID, id)
     setContactId(id)
   }
 

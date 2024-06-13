@@ -21,8 +21,6 @@
     --at-apply: resize-none;
   }
 
-  --header-height: 3.5rem;
-
   .border-r {
     --at-apply: border-r-(1 solid neutral-200);
   }
@@ -30,10 +28,37 @@
   .border-t {
     --at-apply: border-t-(1 solid neutral-200);
   }
+
+  .drag-place {
+    -webkit-app-region: drag;
+  }
+
+  --header-height: 3rem;
+  --app-tool-height: 30px;
+}
+
+.app-tools {
+  height: var(--app-tool-height);
+  --at-apply: flex items-stretch bg-[#eee];
+  .btns {
+    --at-apply: flex;
+    > span {
+      height: var(--app-tool-height);
+      line-height: var(--app-tool-height);
+      --at-apply: px-3 cursor-default;
+      &:hover {
+        --at-apply: bg-neutral-200;
+      }
+    }
+  }
 }
 
 .main-toolbar {
-  --at-apply: flex flex-col gap-1 p-2 bg-dark-500 text-white;
+  --at-apply: flex flex-col gap-1 bg-dark-500 text-white;
+  padding: 0.5rem;
+  .drag-place {
+    --at-apply: mx-[-0.5rem];
+  }
   .module-item {
     --at-apply: w-[40px] h-[40px] flex items-center justify-center text-2xl cursor-pointer rounded transition;
     &:hover {
@@ -66,6 +91,9 @@
   }
 }
 
+.chat-body {
+  --at-apply: p-2 pt-0;
+}
 .contact-body {
   --at-apply: flex flex-col p-[5rem];
 }

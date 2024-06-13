@@ -6,18 +6,18 @@ const categories = [
   {
     route: 'chat',
     icon: 'i-tabler-message-circle',
-    title: 'chat',
+    title: 'chat'
   },
   {
     route: 'contact',
     icon: 'i-tabler-address-book',
-    title: 'contact',
+    title: 'contact'
   },
   {
     route: 'moment',
     icon: 'i-tabler-circles',
-    title: 'moment',
-  },
+    title: 'moment'
+  }
 ]
 
 export const MainToolbar = () => {
@@ -28,9 +28,7 @@ export const MainToolbar = () => {
   const [activeModule, setActiveModule] = useState('')
 
   useEffect(() => {
-    const activeCategory = categories.find(
-      (d) => location.pathname.indexOf(d.route) !== -1
-    )
+    const activeCategory = categories.find((d) => location.pathname.indexOf(d.route) !== -1)
     setActiveModule(activeCategory?.route || '')
   }, [location])
 
@@ -55,18 +53,14 @@ export const MainToolbar = () => {
           </div>
         )
       })}
+      <div className="flex-1 drag-place"></div>
       <Popover
         placement="rightBottom"
         trigger="click"
         content={() => {
           return (
             <div className="w-[100px]">
-              <Button
-                type="text"
-                block
-                onClick={handleSetting}
-                className="text-left"
-              >
+              <Button type="text" block onClick={handleSetting} className="text-left">
                 <i className="i-tabler-settings mr-2"></i>
                 {t('setting')}
               </Button>
@@ -84,7 +78,7 @@ export const MainToolbar = () => {
           )
         }}
       >
-        <div className="module-item mt-auto">
+        <div className="module-item">
           <i className="i-tabler-baseline-density-medium"></i>
         </div>
       </Popover>

@@ -39,12 +39,13 @@ export const ChatBody = ({ contactId }) => {
 
   const CONTACT_MENU = 'CHAT_MESSAGE_CONTACT_MENU'
   const { show: showMessageMenu } = useContextMenu({
-    id: CONTACT_MENU,
+    id: CONTACT_MENU
   })
 
   const handleSendMessage = (message) => {
     setLoading(true)
-    server.sendMessage(contactId, message).then(refreshMessages)
+    const lastIndex = messages.findLastIndex((d) => d.type === 'from')
+    server.sendMessage(contactId, message, lastIndex !== -1 ? messages.slice(lastIndex) : []).then(refreshMessages)
   }
 
   const handleMessageManage = () => {
@@ -83,7 +84,7 @@ export const ChatBody = ({ contactId }) => {
   }
 
   return (
-    <div className="chat-body col-ctn p-2">
+    <div className="chat-body col-ctn">
       {contact ? (
         <>
           <div className="header v-center">
@@ -92,11 +93,7 @@ export const ChatBody = ({ contactId }) => {
               <i className="i-tabler-dots"></i>
             </div>
           </div>
-          <Spin
-            wrapperClassName="ctn-body full-spin"
-            className="full-ctn"
-            spinning={loading}
-          >
+          <Spin wrapperClassName="ctn-body full-spin" className="full-ctn" spinning={loading}>
             <Split
               direction="vertical"
               gutterSize={6}
@@ -105,18 +102,10 @@ export const ChatBody = ({ contactId }) => {
               className="split full-ctn"
               cursor="/img/row-resize.png"
             >
-              <Scrollbar
-                options={scrollbarOptions}
-                className="full-ctn"
-                ref={scrollbar}
-              >
+              <Scrollbar options={scrollbarOptions} className="full-ctn" ref={scrollbar}>
                 <div className="p-2">
                   {messages.map((d) => (
-                    <MessageDisplay
-                      key={d.id}
-                      message={d}
-                      onContextMenu={handleMessageMenu}
-                    ></MessageDisplay>
+                    <MessageDisplay key={d.id} message={d} onContextMenu={handleMessageMenu}></MessageDisplay>
                   ))}
                 </div>
               </Scrollbar>
@@ -125,27 +114,15 @@ export const ChatBody = ({ contactId }) => {
                   onSend={handleSendMessage}
                   tools={() => (
                     <>
-                      <i
-                        className="i-tabler-message-2"
-                        onClick={handleMessageManage}
-                      ></i>
-                      <i
-                        className="i-tabler-photo-scan text-normal"
-                        onClick={handleUploadFile}
-                      ></i>
+                      <i className="i-tabler-message-2" onClick={handleMessageManage}></i>
+                      <i className="i-tabler-photo-scan text-normal" onClick={handleUploadFile}></i>
                     </>
                   )}
                 ></MessageInput>
               </div>
             </Split>
           </Spin>
-          <input
-            ref={fileInput}
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-            hidden
-          />
+          <input ref={fileInput} type="file" accept="image/*" onChange={handleImageChange} hidden />
         </>
       ) : (
         <EmptyInfo>
@@ -159,12 +136,7 @@ export const ChatBody = ({ contactId }) => {
         </Item>
       </Menu>
 
-      {messageManageVisible && (
-        <MessageManage
-          contactId={contactId}
-          onClose={handleCloseMessageManage}
-        ></MessageManage>
-      )}
+      {messageManageVisible && <MessageManage contactId={contactId} onClose={handleCloseMessageManage}></MessageManage>}
     </div>
   )
 }

@@ -26,6 +26,7 @@
     "qwen": "通义千问",
     "moonshot": "月之暗面",
     "zhipu": "智谱",
+    "envTip": "建议将API Key存放在本机的环境变量中而不是写在页面里，环境变量的的名称分别如下：通义千问（DASHSCOPE_API_KEY）、月之暗面（MOONSHOT_API_KEY）、智谱（ZHIPU_API_KEY）",
     "noOptionsTip": "注意到你还没进行AI的配置，你需要首先配置一个可用的AI接口才能进行后续的聊天等功能。",
     "qwenRefer": "通义千问API申请，有可以用挺久的免费额度，见",
     "moonshotRefer": "月之暗面API申请，有可以用挺久的免费额度，见",

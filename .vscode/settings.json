@@ -12,5 +12,7 @@
     "activityBar.background": "#589392",
     "titleBar.activeBackground": "#589392",
     "titleBar.activeForeground": "#FCFBFE"
-  }
+  },
+  "i18n-ally.localesPaths": ["out/renderer/locales", "src/renderer/public/locales"],
+  "i18n-ally.keystyle": "nested"
 }

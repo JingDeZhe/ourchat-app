@@ -20,9 +20,7 @@
 1. 通义千问 API 申请，有可以用挺久的免费额度，见[dashscope](https://help.aliyun.com/zh/dashscope/developer-reference/api-details)
 2. Moonshot API 申请，有可以用挺久的免费额度，见[moonshot](https://platform.moonshot.cn/docs/intro)
 3. 智谱 API 申请，有可以用挺久的免费额度，见[moonshot](https://maas.aminer.cn/dev/api#sdk_install)
-4. 通义千问的 API 调用在浏览器中会有跨域问题，因此需要做一层代理，这里使用的是本地的 Node 转发，见[xiazhi-server](https://github.com/JingDeZhe/xiazhi-server)
-5. Moonshot 可以在浏览器中调用，但对请求间隔和 token 数量限制很严格，经常出现响应超时或者请求频繁的问题，比较不方便。
-6. 智谱可以在浏览器中调用，但情况和 Moonshot 类似，也经常无响应。
+4. 建议将API Key存放在本机的环境变量中而不是写在页面里，环境变量的的名称分别如下：通义千问（DASHSCOPE_API_KEY）、月之暗面（MOONSHOT_API_KEY）、智谱（ZHIPU_API_KEY）
 
 ## 截图
 
