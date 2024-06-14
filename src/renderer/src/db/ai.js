@@ -53,7 +53,7 @@ export const chatWithAi = async (config) => {
   if (message.startsWith('fileStore:')) return EMPTY_RESPONSE
   const messages = []
   if (character) {
-    messages.push({ role: 'system', content: character.startsWith('你是') ? character : `你是${character}` })
+    messages.push({ role: 'system', content: `你在玩角色扮演游戏，是${character}` })
   }
   const histories2 = histories.map((d) => {
     return { role: d.type === 'from' ? 'user' : 'assistant', content: d.content }
