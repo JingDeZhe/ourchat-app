@@ -1,8 +1,10 @@
 import data from '@emoji-mart/data'
 import Picker from '@emoji-mart/react'
 import { Button, Input, Popover } from 'antd'
+import { useTranslation } from 'react-i18next'
 
 export const MessageInput = ({ onSend, tools }) => {
+  const { i18n } = useTranslation()
   const [message, setMessage] = useState('')
 
   const inputRef = useRef(null)
@@ -36,6 +38,8 @@ export const MessageInput = ({ onSend, tools }) => {
         <Popover
           content={() => (
             <Picker
+              previewPosition="none"
+              locale={i18n.language}
               theme="light"
               data={data}
               onEmojiSelect={handleSelectEmoji}

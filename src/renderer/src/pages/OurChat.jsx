@@ -1,10 +1,15 @@
 import { ConfigProvider } from 'antd'
 import { MainToolbar } from './MainToolbar'
 import { AppToolbar } from './AppToolbar'
+import { useTranslation } from 'react-i18next'
+import zhCN from 'antd/locale/zh_CN'
+import enUS from 'antd/locale/en_US'
 
 export const OurChat = () => {
+  const { i18n } = useTranslation()
   return (
     <ConfigProvider
+      locale={i18n.language === 'zh' ? zhCN : enUS}
       theme={{
         components: {
           Descriptions: {
