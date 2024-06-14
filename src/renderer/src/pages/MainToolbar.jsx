@@ -67,7 +67,7 @@ export const MainToolbar = () => {
               <Button
                 type="link"
                 target="_blank"
-                href="https://github.com/JingDeZhe/ourchat"
+                href="https://github.com/JingDeZhe/ourchat-app"
                 block
                 className="text-left"
               >
